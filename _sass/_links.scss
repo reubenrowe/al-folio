@@ -23,6 +23,28 @@ article a, .news a {
     &:hover { color: $theme-color; }
 }
 
+.links a,
+a.hover-highlight {
+    color: $text-color;
+    &:hover { color: $theme-color; }
+}
+
+a.underline-highlight {
+    color: $text-color;
+    &:hover { text-decoration: underline; }
+}
+
+a.underline {
+    color: $text-color;
+    text-decoration: underline;
+}
+
+a.abstract {
+    color: $text-color;
+    &:hover {
+        text-decoration: none;
+    }
+}
 
 // a {
 //   color: $link-color;

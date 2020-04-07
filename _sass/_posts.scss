@@ -1,5 +1,8 @@
 .post-header {
     margin-bottom: $vertical-spacing-unit;
+    #logo {
+        float: right;
+    }
 }
 .post-list {
     margin: 0;

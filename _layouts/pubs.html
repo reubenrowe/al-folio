@@ -1,0 +1,112 @@
+---
+layout: page
+---
+
+{% if site.orcid_id or site.scholar_userid or site.dblp_id %}<p>{% endif %}
+{% if site.orcid_id %}
+<i class="ai ai-orcid ai-lg"></i>
+<span style="padding-right:50px;">
+My <a href="https://orcid.org/{{site.orcid_id}}">ORCID</a> page
+</span>
+{% endif %}
+{% if site.scholar_userid %}
+<i class="ai ai-google-scholar ai-lg"></i>
+<span style="padding-right:50px;">
+My <a href="https://scholar.google.co.uk/citations?user={{site.scholar_userid}}">Google Scholar</a>
+profile
+</span>
+{% endif %}
+{% if site.dblp_id %}
+<i class="ai ai-dblp ai-lg"></i>
+<span style="padding-right:50px;">
+My <a href="http://dblp.org/pid/{{site.dblp_id}}">DBLP</a> page
+</span>
+{% endif %}
+{% if site.orcid_id or site.scholar_userid or site.dblp_id %}</p>{% endif %}
+
+<p>
+  [<a href="#manuscripts">Manuscripts</a>]
+  [<a href="#conference">Conferences</a>]
+  [<a href="#journal">Journals</a>]
+  [<a href="#techreport">Tech. Reports</a>]
+  [<a href="#misc">Misc.</a>]
+  [<a href="#theses">Theses</a>]
+  [<a href="#talks">Talks</a>]
+</p>
+
+{% assign current_year = site.time | date: '%Y' %}
+{% if site.publications.start_year %}
+  {% assign start_year = site.publications.start_year %}
+{% else %}
+  {% assign start_year = current_year %}
+{% endif %}
+{% assign years = (start_year .. current_year) %}
+
+<div class="publications">
+{{ content }}
+</div>
+
+<h3 id="manuscripts">Recent Work and Unpublished Manuscripts</h3>
+
+<div class="compact">
+  {% bibliography -T bib_compact -q @unpublished %}
+</div>
+
+<h3 id="conference">Conference and Published Workshop Papers</h3>
+
+{% for y in years reversed %}
+  {% capture n %}{%
+    bibliography_count -q @inproceedings[year={{y}}]
+  %}{% endcapture %}
+  {% if n != "0" %}
+  <h4 class="year">{{y}}</h4>
+  {% bibliography -q @inproceedings[year={{y}}] %}
+  {% endif %}
+{% endfor %}
+
+<h3 id="journal">Journal Papers</h3>
+
+{% for y in years reversed %}
+  {% capture n %}{%
+    bibliography_count -q @article[year={{y}}]
+  %}{% endcapture %}
+  {% if n != "0" %}
+  <h4 class="year">{{y}}</h4>
+  {% bibliography -q @article[year={{y}}] %}
+  {% endif %}
+{% endfor %}
+
+<h3 id="techreport">Technical Reports</h3>
+
+{% for y in years reversed %}
+  {% capture n %}{%
+    bibliography_count -q @techreport[year={{y}}]
+  %}{% endcapture %}
+  {% if n != "0" %}
+  <h4 class="year">{{y}}</h4>
+  {% bibliography -q @techreport[year={{y}}] %}
+  {% endif %}
+{% endfor %}
+
+<h3 id="misc">Other Articles and Presented Abstracts</h3>
+
+{% for y in years reversed %}
+  {% capture n %}{%
+    bibliography_count -q @misc[year={{y}}]
+  %}{% endcapture %}
+  {% if n != "0" %}
+  <h4 class="year">{{y}}</h4>
+  {% bibliography -q @misc[year={{y}}] %}
+  {% endif %}
+{% endfor %}
+
+<h3 id="theses">Theses and Dissertations</h3>
+
+{% bibliography -q @phdthesis %}
+{% bibliography -q @mastersthesis %}
+
+<h3 id="talks">Invited Talks and Presentations</h3>
+
+<div class="compact">
+{% bibliography -f talks -T bib_compact %}
+</div>

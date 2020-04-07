@@ -1,0 +1,45 @@
+---
+---
+
+<div id="{{entry.key}}">
+
+  {% if entry.slides %}
+  <span class="fa-li">
+    <a class="hover-highlight" href="{{ entry.slides | prepend:'/assets/pdf/' | prepend:site.baseurl | prepend:site.url }}" target="_blank"><i class="fas fa-chalkboard-teacher fa-lg"></i></a>
+  </span>
+  {% elsif entry.pdf %}
+  <span class="fa-li">
+    <a class="hover-highlight" href="{{ entry.pdf | prepend:'/assets/pdf/' | prepend:site.baseurl | prepend:site.url }}" target="_blank"><i class="far fa-file-pdf fa-lg"></i></a>
+  </span>
+  {% endif %}
+
+  {% if site.publications.new_items contains entry.key %}
+  <span class="badge"><img src="https://img.icons8.com/metro/26/000000/new.png"/></span>
+  {% endif %}
+
+  <span class="title">{{entry.title}}</span>
+
+  {% if entry.author_array %}
+  <span class="author">
+    {% include authors.html authors=entry.author_array %}
+  </span>
+  {% endif %}
+
+  {% if entry.venue and site.data.venues[entry.venue] %}
+    {% if site.data.venues[entry.venue].url %}
+    <em><a class="underline-highlight" href="{{site.data.venues[entry.venue].url}}" target="_blank">{{site.data.venues[entry.venue].name}}</a></em>
+    {% else %}
+    <em>{{site.data.venues[entry.venue].name}}</em>
+    {% endif %}
+  {% endif %}
+
+  {% if entry.date %}
+  <span class="date">({{entry.date}})</span>
+  {% endif %}
+
+  {% if entry.note %}
+  <span class="note">{{entry.note}}</span>
+  {% endif %}
+
+
+</div>

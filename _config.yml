@@ -28,8 +28,9 @@ og_image: # The site-wide (default for all links) Open Graph preview image
 github_username: # your GitHub user name
 twitter_username: # your Twitter handle
 linkedin_username: # your LinkedIn user name
-scholar_userid: # your Google Scholar ID
 orcid_id: # your ORCID ID
+dblp_id: # your DBLP Unique Identifier (of the form dd/dddd)
+scholar_userid: # your Google Scholar ID
 medium_username: # your Medium username
 quora_username: # your Quora username
 publons_id: # your ID on Publons
@@ -79,6 +80,13 @@ collections:
     permalink: /projects/:path/
 
 news_limit: 5
+
+# -----------------------------------------------------------------------------
+# Publications settings
+# -----------------------------------------------------------------------------
+publications:
+  start_year: # The year that your publication record begins
+  new_items: [] # Put the bibliography keys of new items here
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
